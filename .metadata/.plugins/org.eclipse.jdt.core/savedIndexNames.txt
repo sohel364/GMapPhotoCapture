@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+E:\Projects\GMapPhotoCapture\GMapPhotoCapture\.metadata\.plugins\org.eclipse.jdt.core
+2030655124.index
+2983043416.index
