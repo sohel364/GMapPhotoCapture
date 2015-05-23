@@ -693,11 +693,11 @@ int id image 0x7f0d003d
 int id listMode 0x7f0d0009
 int id list_item 0x7f0d003f
 int id map 0x7f0d0065
-int id map_container 0x7f0d0064
 int id match_parent 0x7f0d0030
 int id middle 0x7f0d0016
 int id monochrome 0x7f0d0037
 int id multiply 0x7f0d0024
+int id mySimplePieChart 0x7f0d0064
 int id never 0x7f0d001f
 int id none 0x7f0d000e
 int id normal 0x7f0d000a

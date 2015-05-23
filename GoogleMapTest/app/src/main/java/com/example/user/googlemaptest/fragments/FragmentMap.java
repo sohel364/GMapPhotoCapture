@@ -2,6 +2,7 @@ package com.example.user.googlemaptest.fragments;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
+import com.example.user.googlemaptest.Utilities.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -31,54 +33,40 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class FragmentMap extends Fragment{
 
+    private static  View mView;
     private GoogleMap mGoogleMap;
-    private SupportMapFragment mFragment;
+
     private LocationManager mLocationManager;
     private Marker mMarker;
 
-
-    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
-        @Override
-        public void onMyLocationChange(Location location) {
-            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-            mMarker = mGoogleMap.addMarker(new MarkerOptions().position(loc));
-            if(mGoogleMap != null){
-                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f));
-            }
-        }
-    };
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
-        loadCurrentLocationMap();
-        return  view;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        if(mView != null) {
+            ViewGroup parent =(ViewGroup) mView.getParent();
+            if(parent != null) {
+                parent.removeView(mView);
+            }
+        }
+        try {
+            mView = inflater.inflate(R.layout.fragment_map, container, false);
+        } catch (Exception e) {
+
+        }
+
+        SupportMapFragment mapFragment = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map) );
+        if(mapFragment != null) {
+            mGoogleMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        } else {
+            mGoogleMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
+            loadCurrentLocationMap();
+            //Toast.makeText(getActivity().getApplicationContext(), "Map fragment cannot be found", Toast.LENGTH_LONG).show();
+        }
+
+        return  mView;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        FragmentManager fm = getChildFragmentManager();
-        mFragment = (SupportMapFragment) fm.findFragmentById(R.id.map_container);
-        if (mFragment == null) {
-            mFragment = SupportMapFragment.newInstance();
-            fm.beginTransaction().replace(R.id.map_container, mFragment).commit();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mGoogleMap == null) {
-            mGoogleMap = mFragment.getMap();
-            mGoogleMap.setMyLocationEnabled(true);
-            //mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)));
-            //loadCurrentLocationMap();
-            mGoogleMap.setOnMyLocationChangeListener(myLocationChangeListener);
-        }
-    }
 
     private void loadCurrentLocationMap() {
         LocationManager service = (LocationManager) getActivity().getSystemService(Activity.LOCATION_SERVICE);
@@ -87,14 +75,26 @@ public class FragmentMap extends Fragment{
         boolean enabledWiFi = service
                 .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-
         // Check if enabled and if not send user to the GSP settings
         // Better solution would be to display a dialog and suggesting to
         // go to the settings
         if (!enabledGPS) {
-            Toast.makeText(getActivity().getApplicationContext(), "GPS signal not found", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
+            Toast.makeText(getActivity().getApplicationContext(), "GPS signal not found\nEnabling GPS!!!",
+                    Toast.LENGTH_LONG).show();
+
+            try {
+                Utils.turnGPSOn(getActivity().getApplicationContext());
+            } catch (Exception e) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity().getApplicationContext());
+                alert.setTitle("Alert!!!");
+                alert.setMessage("Your GPS is not enabled. Please enabled the gps.");
+                alert.setPositiveButton("OK",null);
+                alert.show();
+
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+
         }
 
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -116,7 +116,6 @@ public class FragmentMap extends Fragment{
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F));
         }
 
-
-
     }
+
 }

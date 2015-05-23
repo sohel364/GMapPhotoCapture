@@ -2104,11 +2104,11 @@ containing a value of this type.
         public static final int listMode=0x7f0d0009;
         public static final int list_item=0x7f0d003f;
         public static final int map=0x7f0d0065;
-        public static final int map_container=0x7f0d0064;
         public static final int match_parent=0x7f0d0030;
         public static final int middle=0x7f0d0016;
         public static final int monochrome=0x7f0d0037;
         public static final int multiply=0x7f0d0024;
+        public static final int mySimplePieChart=0x7f0d0064;
         public static final int never=0x7f0d001f;
         public static final int none=0x7f0d000e;
         public static final int normal=0x7f0d000a;

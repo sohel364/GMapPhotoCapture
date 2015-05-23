@@ -249,7 +249,8 @@ ADDED from AndroidManifest.xml:31:9
 	android:name
 		ADDED from AndroidManifest.xml:32:13
 meta-data#com.google.android.gms.version
-ADDED from com.google.android.gms:play-services-base:7.3.0:21:9
+ADDED from AndroidManifest.xml:35:9
+MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
@@ -277,6 +278,6 @@ MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
 	android:value
-		ADDED from com.google.android.gms:play-services-base:7.3.0:23:13
+		ADDED from AndroidManifest.xml:37:13
 	android:name
-		ADDED from com.google.android.gms:play-services-base:7.3.0:22:13
+		ADDED from AndroidManifest.xml:36:13

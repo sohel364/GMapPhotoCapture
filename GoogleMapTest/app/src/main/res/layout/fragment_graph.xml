@@ -12,4 +12,13 @@
         android:textStyle="bold"
         android:textColor="@color/Black"/>
 
+
+    <com.androidplot.pie.PieChart
+        android:id="@+id/mySimplePieChart"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        androidPlot.title="A Simple XY Plot"
+        androidPlot.domainLabel="Domain"
+        androidPlot.rangeLabel="Range"/>
+
 </LinearLayout>
