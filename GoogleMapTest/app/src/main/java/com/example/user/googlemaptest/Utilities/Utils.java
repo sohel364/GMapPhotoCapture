@@ -1,9 +1,13 @@
 package com.example.user.googlemaptest.Utilities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 
 /**
  * Created by user on 5/23/2015.
@@ -37,5 +41,33 @@ public class Utils {
             poke.setData(Uri.parse("3"));
             context.sendBroadcast(poke);
         }
+    }
+
+    /*
+     * isOnline - Check if there is a NetworkConnection
+     * @return boolean
+     */
+    public static boolean isInternetConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void createOKDialog(Context context, String title, String message) {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle(title);
+        alert.setMessage(message);
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
     }
 }

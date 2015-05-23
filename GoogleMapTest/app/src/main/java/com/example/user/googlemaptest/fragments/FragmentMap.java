@@ -1,19 +1,17 @@
 package com.example.user.googlemaptest.fragments;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +73,10 @@ public class FragmentMap extends Fragment{
         boolean enabledWiFi = service
                 .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
+        if(!Utils.isInternetConnected(getActivity().getApplicationContext())) {
+            Utils.createOKDialog(getActivity(), "Internet Connection!!!", "There is no internet connection available. Please enable Wifi or Data connection for better use of the map.");
+            return;
+        }
         // Check if enabled and if not send user to the GSP settings
         // Better solution would be to display a dialog and suggesting to
         // go to the settings
@@ -84,19 +86,30 @@ public class FragmentMap extends Fragment{
 
             try {
                 Utils.turnGPSOn(getActivity().getApplicationContext());
+                addMarkerToCurrentLocation();
             } catch (Exception e) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity().getApplicationContext());
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setTitle("Alert!!!");
-                alert.setMessage("Your GPS is not enabled. Please enabled the gps.");
-                alert.setPositiveButton("OK",null);
-                alert.show();
+                alert.setMessage("Your GPS is not enabled. Please enable the GPS settings.");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                        addMarkerToCurrentLocation();
+                    }
+                });
+                alert.show();
             }
 
+        } else {
+            addMarkerToCurrentLocation();
         }
 
+    }
+
+    private void addMarkerToCurrentLocation() {
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         // Define the criteria how to select the locatioin provider -> use
@@ -115,7 +128,5 @@ public class FragmentMap extends Fragment{
             mMarker = mGoogleMap.addMarker(markerOptions);
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F));
         }
-
     }
-
 }
