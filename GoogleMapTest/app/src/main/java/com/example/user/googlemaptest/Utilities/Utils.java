@@ -37,6 +37,9 @@ import java.util.List;
  */
 public class Utils {
 
+    public static final String TAG_LOG = "GoogleMapTest";
+    public static final int CAMERA_REQUEST = 111;
+
     public static void turnGPSOn(Context context)
     {
         Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
@@ -92,51 +95,6 @@ public class Utils {
             }
         });
         alert.show();
-    }
-
-
-
-    public static void HttpResponseData() throws IOException {
-
-        try {
-            /*
-                @Tamal We have to pass the params in the url it's static right now.
-             */
-            URL url = new URL("http://inzaana.com/WebBuilder/lon_lat_service.php?long_min=28.40&long_max=28.60&lat_min=77.10&lat_max=77.30");
-            HttpURLConnection con = (HttpURLConnection) url
-                    .openConnection();
-            readStream(con.getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-      //  return lstString;
-    }
-
-    private  static List<String> readStream(InputStream in) {
-        BufferedReader reader = null;
-        List<String> lstString = new ArrayList<String>();
-        try {
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                lstString.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return lstString;
     }
 
 }

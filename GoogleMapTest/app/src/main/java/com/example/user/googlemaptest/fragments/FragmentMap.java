@@ -5,26 +5,39 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
+import com.example.user.googlemaptest.Utilities.AsyncTaskHelper;
 import com.example.user.googlemaptest.Utilities.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by user on 5/20/2015.
@@ -36,6 +49,16 @@ public class FragmentMap extends Fragment{
 
     private LocationManager mLocationManager;
     private Marker mMarker;
+
+    private List<Marker> mMarkerList;
+    private HashMap<String, Marker> mMarkerHash;
+
+    private static String sTagName;
+
+    public double latMax;
+    public double latMin;
+    public double longMax;
+    public double longMin;
 
     @Nullable
     @Override
@@ -53,18 +76,87 @@ public class FragmentMap extends Fragment{
 
         }
 
+        initView();
+        initListeners();
+
+        return  mView;
+    }
+
+
+
+    private void initView() {
+        sTagName = getActivity().getString(R.string.app_name);
         SupportMapFragment mapFragment = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map) );
         if(mapFragment != null) {
             mGoogleMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         } else {
             mGoogleMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
+            mGoogleMap.clear();
+            mMarkerHash = new HashMap<String, Marker>();
             loadCurrentLocationMap();
             //Toast.makeText(getActivity().getApplicationContext(), "Map fragment cannot be found", Toast.LENGTH_LONG).show();
         }
-
-        return  mView;
     }
 
+    private void initListeners() {
+        mGoogleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                //mGoogleMap.clear();
+                Float maxZoomLevel = mGoogleMap.getMaxZoomLevel();
+                Float zoomLevel = mGoogleMap.getCameraPosition().zoom;
+                Log.e(sTagName, "Max Zoom Level: "+maxZoomLevel);
+                Log.e(sTagName,"Current Zoom Level: "+zoomLevel);
+                if(zoomLevel>maxZoomLevel/2) {
+                    getLatitudeLongitudeFourCorners();
+                    clearUnnecessaryMarkers();
+
+                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper();
+                    asyncTaskHelper.execute(FragmentMap.this, null, null);
+                }
+            }
+        });
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(getActivity().getApplicationContext(), "Marker Clicked", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
+
+        mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, Utils.CAMERA_REQUEST);
+            }
+        });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Utils.CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            Toast.makeText(getActivity().getApplicationContext(),"Photo Found", Toast.LENGTH_LONG).show();
+            //((ImageView)inflatedView.findViewById(R.id.image)).setImageBitmap(photo);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void clearUnnecessaryMarkers() {
+        Iterator it = mMarkerHash.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            Marker marker = (Marker) pair.getValue();
+            double lat = marker.getPosition().latitude;
+            double lon = marker.getPosition().longitude;
+            if(lat<latMin || lat>latMax || lon<longMin || lon>longMax) {
+                marker.remove();
+                it.remove();
+            }
+        }
+    }
 
     private void loadCurrentLocationMap() {
         LocationManager service = (LocationManager) getActivity().getSystemService(Activity.LOCATION_SERVICE);
@@ -126,7 +218,63 @@ public class FragmentMap extends Fragment{
         markerOptions.title("Your Location");
         if(mGoogleMap != null) {
             mMarker = mGoogleMap.addMarker(markerOptions);
-            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F));
+            //mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F));
+
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F), new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                    getLatitudeLongitudeFourCorners();
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+            //getLatitudeLongitudeFourCorners();
         }
+    }
+
+    private void getLatitudeLongitudeFourCorners (){
+        VisibleRegion vr = mGoogleMap.getProjection().getVisibleRegion();
+         //= vr.nearLeft.latitude - vr.farRight.latitude > 0 ? vr.nearLeft.latitude : vr.farRight.latitude;
+        if(vr.nearLeft.latitude - vr.farRight.latitude > 0) {
+            latMax = vr.nearLeft.latitude;
+            latMin = vr.farRight.latitude;
+        } else {
+            latMax = vr.farRight.latitude;
+            latMin = vr.nearLeft.latitude;
+        }
+        if(vr.nearLeft.longitude - vr.farRight.longitude > 0) {
+            longMax = vr.nearLeft.longitude;
+            longMin = vr.farRight.longitude;
+        } else {
+            longMax = vr.farRight.longitude;
+            longMin = vr.nearLeft.longitude;
+        }
+        Log.e(sTagName, "Max Latitude: "+latMax);
+        Log.e(sTagName, "Min Latitude: "+latMin);
+        Log.e(sTagName, "Max Longitude: "+longMax);
+        Log.e(sTagName, "Min Longitude: "+longMin);
+        Marker marker;
+        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.nearLeft,"Near Left",vr.nearLeft.toString()));
+        mMarkerHash.put("" + vr.nearLeft.latitude + "" + vr.nearLeft.longitude, marker);
+        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.nearRight,"Near Right",vr.nearRight.toString()));
+        mMarkerHash.put(""+vr.nearRight.latitude+""+vr.nearRight.longitude,marker);
+        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.farLeft,"Far Left",vr.farLeft.toString()));
+        mMarkerHash.put(""+vr.farLeft.latitude+""+vr.farLeft.longitude,marker);
+        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.farRight,"Far Right",vr.farRight.toString()));
+        mMarkerHash.put(""+vr.farRight.latitude+""+vr.farRight.longitude,marker);
+    }
+
+    private MarkerOptions createMarkerOptionsByLatLng(LatLng latLng, String title, String snippet) {
+
+        Log.e(sTagName, title+": "+snippet);
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title(title);
+        markerOptions.snippet(snippet);
+        return markerOptions;
     }
 }
