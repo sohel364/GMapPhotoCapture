@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.user.googlemaptest.R;
 import com.example.user.googlemaptest.Utilities.AsyncTaskHelper;
 import com.example.user.googlemaptest.Utilities.Utils;
+import com.example.user.googlemaptest.model.Address;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -50,15 +51,14 @@ public class FragmentMap extends Fragment{
     private LocationManager mLocationManager;
     private Marker mMarker;
 
-    private List<Marker> mMarkerList;
-    private HashMap<String, Marker> mMarkerHash;
+    private HashMap<Marker, Long> mMarkerHash;
 
     private static String sTagName;
 
-    public double latMax;
-    public double latMin;
-    public double longMax;
-    public double longMin;
+    private double latMax;
+    private double latMin;
+    private double longMax;
+    private double longMin;
 
     @Nullable
     @Override
@@ -92,7 +92,7 @@ public class FragmentMap extends Fragment{
         } else {
             mGoogleMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
             mGoogleMap.clear();
-            mMarkerHash = new HashMap<String, Marker>();
+            mMarkerHash = new HashMap<Marker, Long>();
             loadCurrentLocationMap();
             //Toast.makeText(getActivity().getApplicationContext(), "Map fragment cannot be found", Toast.LENGTH_LONG).show();
         }
@@ -105,14 +105,14 @@ public class FragmentMap extends Fragment{
                 //mGoogleMap.clear();
                 Float maxZoomLevel = mGoogleMap.getMaxZoomLevel();
                 Float zoomLevel = mGoogleMap.getCameraPosition().zoom;
-                Log.e(sTagName, "Max Zoom Level: "+maxZoomLevel);
-                Log.e(sTagName,"Current Zoom Level: "+zoomLevel);
-                if(zoomLevel>maxZoomLevel/2) {
+                Log.e(sTagName, "Max Zoom Level: " + maxZoomLevel);
+                Log.e(sTagName, "Current Zoom Level: " + zoomLevel);
+                if (zoomLevel > maxZoomLevel - 7.1) {
                     getLatitudeLongitudeFourCorners();
-                    clearUnnecessaryMarkers();
 
-                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper();
+                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(latMin,latMax,longMin,longMax);
                     asyncTaskHelper.execute(FragmentMap.this, null, null);
+
                 }
             }
         });
@@ -148,7 +148,7 @@ public class FragmentMap extends Fragment{
         Iterator it = mMarkerHash.entrySet().iterator();
         while(it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            Marker marker = (Marker) pair.getValue();
+            Marker marker = (Marker) pair.getKey();
             double lat = marker.getPosition().latitude;
             double lon = marker.getPosition().longitude;
             if(lat<latMin || lat>latMax || lon<longMin || lon>longMax) {
@@ -259,25 +259,32 @@ public class FragmentMap extends Fragment{
         Log.e(sTagName, "Min Latitude: "+latMin);
         Log.e(sTagName, "Max Longitude: "+longMax);
         Log.e(sTagName, "Min Longitude: "+longMin);
-        Marker marker;
-        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.nearLeft,"Near Left",vr.nearLeft.toString()));
-        mMarkerHash.put("" + vr.nearLeft.latitude + "" + vr.nearLeft.longitude, marker);
-        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.nearRight,"Near Right",vr.nearRight.toString()));
-        mMarkerHash.put(""+vr.nearRight.latitude+""+vr.nearRight.longitude,marker);
-        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.farLeft,"Far Left",vr.farLeft.toString()));
-        mMarkerHash.put(""+vr.farLeft.latitude+""+vr.farLeft.longitude,marker);
-        marker = mGoogleMap.addMarker(createMarkerOptionsByLatLng(vr.farRight,"Far Right",vr.farRight.toString()));
-        mMarkerHash.put(""+vr.farRight.latitude+""+vr.farRight.longitude,marker);
     }
 
     private MarkerOptions createMarkerOptionsByLatLng(LatLng latLng, String title, String snippet) {
 
-        Log.e(sTagName, title+": "+snippet);
+        Log.e(sTagName, title+": "+snippet+", "+latLng.latitude+", "+latLng.longitude);
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title(title);
         markerOptions.snippet(snippet);
         return markerOptions;
+    }
+
+    public void loadAddressMarkers(List<Address> addressList) {
+        if(addressList == null || addressList.size() <= 0) {
+            return;
+        }
+        clearUnnecessaryMarkers();
+        int limit = addressList.size();
+        for(int i = 0; i<limit; i++) {
+            Address address = addressList.get(i);
+            MarkerOptions markerOptions = createMarkerOptionsByLatLng(new LatLng(address.getLatitude(),address.getLongitude()),
+                    address.getName(), "Tap Here to Take Picture");
+            Marker marker = mGoogleMap.addMarker(markerOptions);
+
+            mMarkerHash.put(marker, address.getId());
+        }
     }
 }
