@@ -210,6 +210,9 @@ public class FragmentMap extends Fragment{
         String provider = mLocationManager.getBestProvider(criteria, false);
         Location location = mLocationManager.getLastKnownLocation(provider);
 
+        if(location == null) {
+            return;
+        }
         LatLng currentLatlong = new LatLng(location.getLatitude(), location.getLongitude());
 
         MarkerOptions markerOptions = new MarkerOptions();
