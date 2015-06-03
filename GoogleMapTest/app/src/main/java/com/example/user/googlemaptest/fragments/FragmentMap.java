@@ -43,7 +43,7 @@ import java.util.Map;
 /**
  * Created by user on 5/20/2015.
  */
-public class FragmentMap extends Fragment{
+public class FragmentMap extends BaseFragment{
 
     private static  View mView;
     private GoogleMap mGoogleMap;
@@ -127,6 +127,7 @@ public class FragmentMap extends Fragment{
         mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                Long id = mMarkerHash.get(marker);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, Utils.CAMERA_REQUEST);
             }
@@ -286,5 +287,10 @@ public class FragmentMap extends Fragment{
 
             mMarkerHash.put(marker, address.getId());
         }
+    }
+
+    @Override
+    public void executeAsyncTaskCallBack(List<Address> addressList) {
+        loadAddressMarkers(addressList);
     }
 }

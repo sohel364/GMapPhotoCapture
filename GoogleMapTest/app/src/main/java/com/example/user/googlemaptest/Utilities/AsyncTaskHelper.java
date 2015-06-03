@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
+import com.example.user.googlemaptest.fragments.BaseFragment;
 import com.example.user.googlemaptest.fragments.FragmentMap;
 import com.example.user.googlemaptest.model.Address;
 
@@ -24,9 +25,9 @@ import java.util.List;
 /**
  * Created by user on 5/24/2015.
  */
-public class AsyncTaskHelper extends AsyncTask<FragmentMap, String,String>{
+public class AsyncTaskHelper extends AsyncTask<BaseFragment, String,String>{
 
-    private FragmentMap mFragmentMap;
+    private BaseFragment mFragmentMap;
     private List<Address> mAddressList;
     private String urlString;
 
@@ -42,8 +43,8 @@ public class AsyncTaskHelper extends AsyncTask<FragmentMap, String,String>{
     }
 
     @Override
-    protected String doInBackground(FragmentMap... params) {
-        mFragmentMap = (FragmentMap) params[0];
+    protected String doInBackground(BaseFragment... params) {
+        mFragmentMap = (BaseFragment) params[0];
         try {
             HttpResponseData();
         } catch (IOException e) {
@@ -55,7 +56,7 @@ public class AsyncTaskHelper extends AsyncTask<FragmentMap, String,String>{
     @Override
     protected void onPostExecute(String s) {
         //super.onPostExecute(s);
-        mFragmentMap.loadAddressMarkers(mAddressList);
+        mFragmentMap.executeAsyncTaskCallBack(mAddressList);
     }
 
 
@@ -132,7 +133,7 @@ public class AsyncTaskHelper extends AsyncTask<FragmentMap, String,String>{
     /*
     private void convertJsonToObject(String jsonString) {
         try {
-            Log.e(Utils.TAG_LOG, jsonString);
+            Log.e(Utils.TAG_LOG, jsonString);   
             JSONObject jsonssObject = new JSONObject(jsonString);
             //Log.e(Utils.TAG_LOG, "json Object"+jsonssObject.toString());
 
