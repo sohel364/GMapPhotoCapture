@@ -2,179 +2,347 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-284281137b3c37084965b43c3315bd95c4bacb70.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-5ed8062e1743d4fcbe07d92dac82882972897a66.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-de7e2615c0d81ed9b740c909e3d6f41aa66a903d.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-49c304a0efa2079810ad2b209320d97d9490e3df.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-a51403b96237d4a37de6dfe9dfe71cc105cb09ad.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-c6d63a6e2762a92bba1768ede692198f6611177f.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-5bb2189fc8c17f40c6eaa49506d650369792d9b6.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-4f85b638eb154d51fe7959e53e4492fcf105a781.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-dd7d96a7318f7100a96df2959993f45ceaa9db86.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-e55f7fb106b11c66db09f396e596d34ec62f0831.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-e22666e20665f44e31af98498b55b40e43130d0a.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-95325a4e0a3ea05fe1c09036e9f7e2664eb692d0.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\libs\androidplot-core-0.6.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3db0daea52375b26bfa61c59b8df93950bdefbbc">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-d9f15f427674e06a1977c6be119d3aeb60233b3b.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\jars\classes.jar"
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-4aecbb91f939bb7dbdd1fbca4cabcdc5e0c5edd0.jar" />
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-0535218da89a5087fd6a2600ef07b26690bb31b1.jar" />
     </item>
     <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-96606bc08d078d7bde1d3b4bf5abcbc58abdf0b6.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-5f9a3379d5279dc23e6e8bad050d8238140eb675.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="565a01f90f1529f73362707c4c185d0623a68782">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-998cc809646579909415db84c0be3359dd928354.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-35ad056ea4fd50ff12ff6dbb8156b991b5f2b350.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-a4fe539736d28b083bb0123a8087eb188c41da4c.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-112c2dfbbbf6a4420f099fb00251560a9acc7490.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-8efcf286dbada66c43bf94e9d921498b624cad8d.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-af06deef841e43b16368fafa9a85913290404bc5.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-c3f4dbbb9f0a1f91a5d8c895c4d941a6968f10b4.jar" />
-    </item>
-    <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\jars\classes.jar"
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-31f44f7c62efe860fd19601f83acb0530540275e.jar" />
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-d6f73945d2cc4630939d54775c44520a5cf97d69.jar" />
     </item>
     <item
-        jar="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\jars\classes.jar"
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-f33ce854071251b4fd6aae254746666a74e38442.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-376fa3a5f73d0be18c5181fc8aff7db54459db4d.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-e26c6ff3306cd03f2007ecd7c654bac124bc52b7.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-4234220299c0eeb0ee481b12aa704bcb5b92c7b1.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-4bbfde62a507781f54bdc7d5857182b93242f163.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-7a5c96da54c4bfa4836f7864b50d002feeba243e.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-9fe5a1138db17d5a1147f4e4a78cfa5b04efa28e.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-13aadafd7dcf76cc502488266bbdbaf7a52c7f84.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
-        <dex dex="C:\Users\user\AndroidStudioProjects\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-a3e50554942e6ab655422155c744cbd581ccfc06.jar" />
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-831ba94cd5c0fbb2bd8301ad985a111b5dd4d380.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-7bb3bf2b7021f3a428bca677f198e1efd7f788e9.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-b96c7aba3b24312c8213b5ad27569b89c4df3748.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-5dcd72dbfb8c6391297782bc9c986235b48a043d.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-4336eda34087982f0eabde50d0121b427292fc94.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-c86c749106254257ac2c18cedf524e26872f1493.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-8da855657b7053777c846bcc0011a19fe44c05ef.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-469e96bb015b0255019ebb0748750cd472f6473e.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-bd802cd93f579ff46181e08b8ecc21b850920f57.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\libs\androidplot-core-0.6.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3db0daea52375b26bfa61c59b8df93950bdefbbc">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-da3071593bce00e1206477502879526cd056dfd3.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-73a6ae33cef256bd50352e781b2f5e3eb2acce10.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-bf4bafbfdd805ac269fe81e24e1e13ed821c9cb2.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-74c8fa6830e9ec1a2ec5d5d855635572755fea44.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-279a3b7e3c7c05164d4feb9117534efd867970b9.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-006654f8c3b3093da7dbe903280fdb363daaf1f1.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-40e0f4efa17c0561d71b7fc29615337f3f0cb0b1.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-d0278be0c16d77b55b2123e71743857f232ff6f3.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-b059b7e797a0671988aefe233f3334bf48390ba2.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\libs\androidplot-core-0.6.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3db0daea52375b26bfa61c59b8df93950bdefbbc">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-58b98313ac662c0ac55ce89e878a5922d257561a.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-eedd447d2dc748492a7c9afebc7fb5939928e160.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-f20ac1a510559b0395c953c7e8948a96222475da.jar" />
+    </item>
+    <item
+        jar="C:\Program Files\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-a2da3b5cf980d75a84e9ea7d4ee93cc49a49182d.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-7bb83c77f396cab9552c3d3baa520708557228b4.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-734234c173e10b6d2f74fa19fee3623ad3e4c879.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-1bfdd7ac3ab77ea576edb254b839e3e98986aac6.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-1f6eb0a51c86c10baaa1074ef3b32e969ff849d2.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-38a77bbada61112ad5dcda21b2522a03c625528f.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-41cf0b70c53b9569883d0d5812c6e4f6ddf221dc.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-79e5a5e9c2433e51463129c0aedb413908381134.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-d55abf8f881825c642057bbaa5816ffed6c73fd6.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-15e1f0c571cc768a5cd33eea4bcddcef088506cc.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-daed22bc0f62c8348798b80d80544eecb950bf02.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-c5d3c8ebc83423ad2f29f2b862321042c7906de5.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-f19dfb380b97f1fa28bac61a63779aed11dc654a.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-f15b3e7c17bfdb95c167b9657e9ca91f9325642d.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-e63448daa5f8fac078425424424dd3e71edbadba.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-f8d2d63d8fe3c82e7f5859bca80aa46ba3b4cd98.jar" />
+    </item>
+    <item
+        jar="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="C:\Users\simon\Desktop\working_app\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-afc2c377051445468d273bc7e66d6505ba523faf.jar" />
+    </item>
+    <item
+        jar="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="E:\Projects\last\GMapPhotoCapture\GoogleMapTest\app\build\intermediates\pre-dexed\debug\classes-dbe3c074448d4a5d65837be400f3be2b527a97a0.jar" />
     </item>
 
 </items>

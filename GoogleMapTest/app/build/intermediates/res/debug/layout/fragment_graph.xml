@@ -15,10 +15,19 @@
 
     <com.androidplot.pie.PieChart
         android:id="@+id/mySimplePieChart"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         androidPlot.title="A Simple XY Plot"
         androidPlot.domainLabel="Domain"
-        androidPlot.rangeLabel="Range"/>
+        androidPlot.rangeLabel="Range"
+        android:layout_weight="1"/>
 
-</LinearLayout><!-- From: file:/C:/Users/user/AndroidStudioProjects/GoogleMapTest/app/src/main/res/layout/fragment_graph.xml -->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/list_view_locations"
+        android:layout_weight="2">
+
+    </ListView>
+
+</LinearLayout><!-- From: file:/C:/Users/simon/Desktop/working_app/GMapPhotoCapture/GoogleMapTest/app/src/main/res/layout/fragment_graph.xml -->

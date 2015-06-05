@@ -13,21 +13,19 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
 import com.example.user.googlemaptest.Utilities.AsyncTaskHelper;
 import com.example.user.googlemaptest.Utilities.Utils;
+import com.example.user.googlemaptest.activities.cameraTest;
 import com.example.user.googlemaptest.model.Address;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,7 +41,7 @@ import java.util.Map;
 /**
  * Created by user on 5/20/2015.
  */
-public class FragmentMap extends Fragment{
+public class FragmentMap extends BaseFragment{
 
     private static  View mView;
     private GoogleMap mGoogleMap;
@@ -59,6 +57,9 @@ public class FragmentMap extends Fragment{
     private double latMin;
     private double longMax;
     private double longMin;
+
+    Long id;
+
 
     @Nullable
     @Override
@@ -126,9 +127,23 @@ public class FragmentMap extends Fragment{
 
         mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
+
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, Utils.CAMERA_REQUEST);
+                id = mMarkerHash.get(marker);
+                // camera start here
+                //startActivityForResult(intent, Utils.CAMERA_REQUEST);
+                Toast.makeText(getActivity().getApplicationContext(),"Clicked for camera",Toast.LENGTH_LONG).show();
+                try {
+                    Intent _intent = new Intent(getActivity().getApplicationContext(), cameraTest.class);
+                    startActivity(_intent);
+                }
+                catch (Exception ex){
+                    Toast.makeText(getActivity().getApplicationContext(),ex.toString(),Toast.LENGTH_LONG).show();
+                    throw ex;
+
+                }
+
             }
         });
     }
@@ -240,7 +255,7 @@ public class FragmentMap extends Fragment{
 
     private void getLatitudeLongitudeFourCorners (){
         VisibleRegion vr = mGoogleMap.getProjection().getVisibleRegion();
-         //= vr.nearLeft.latitude - vr.farRight.latitude > 0 ? vr.nearLeft.latitude : vr.farRight.latitude;
+        //= vr.nearLeft.latitude - vr.farRight.latitude > 0 ? vr.nearLeft.latitude : vr.farRight.latitude;
         if(vr.nearLeft.latitude - vr.farRight.latitude > 0) {
             latMax = vr.nearLeft.latitude;
             latMin = vr.farRight.latitude;
@@ -286,5 +301,10 @@ public class FragmentMap extends Fragment{
 
             mMarkerHash.put(marker, address.getId());
         }
+    }
+
+    @Override
+    public void executeAsyncTaskCallBack(List<Address> addressList) {
+        loadAddressMarkers(addressList);
     }
 }
