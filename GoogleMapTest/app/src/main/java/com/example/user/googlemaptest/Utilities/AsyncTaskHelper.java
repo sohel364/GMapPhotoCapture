@@ -5,6 +5,10 @@ import android.os.Build;
 import android.util.Log;
 
 import com.example.user.googlemaptest.fragments.BaseFragment;
+<<<<<<< HEAD
+=======
+import com.example.user.googlemaptest.fragments.FragmentMap;
+>>>>>>> d1e8c2eaa67214a61210bda4c91ac04e2dc5c06b
 import com.example.user.googlemaptest.model.Address;
 
 import org.json.JSONObject;
@@ -132,7 +136,7 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String,String>{
     /*
     private void convertJsonToObject(String jsonString) {
         try {
-            Log.e(Utils.TAG_LOG, jsonString);
+            Log.e(Utils.TAG_LOG, jsonString);   
             JSONObject jsonssObject = new JSONObject(jsonString);
             //Log.e(Utils.TAG_LOG, "json Object"+jsonssObject.toString());
 

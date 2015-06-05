@@ -129,6 +129,7 @@ public class FragmentMap extends BaseFragment{
             @Override
 
             public void onInfoWindowClick(Marker marker) {
+                Long id = mMarkerHash.get(marker);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 id = mMarkerHash.get(marker);
                 // camera start here
