@@ -141,8 +141,7 @@ public class FragmentMap extends BaseFragment{
                 }
                 catch (Exception ex){
                     Toast.makeText(getActivity().getApplicationContext(),ex.toString(),Toast.LENGTH_LONG).show();
-                    throw ex;
-
+                       ex.printStackTrace();
                 }
 
             }

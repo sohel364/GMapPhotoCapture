@@ -3,6 +3,7 @@ package com.example.user.googlemaptest.activities;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,7 +32,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.user.googlemaptest.R.id;
 import static com.example.user.googlemaptest.R.layout;
@@ -45,6 +48,9 @@ public class cameraTest extends Activity {
     public Camera.Parameters p;
     public String flashMood = null;
     Boolean isFlashSwtchOn=false;
+    public Map mapBitMap=null;
+
+
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -53,6 +59,7 @@ public class cameraTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_camera_test);
+        //mapBitMap = new HashMap();
 
         mCamera = getCameraInstance();
         mCameraPreview = new CameraPreview(this, mCamera);
@@ -82,6 +89,7 @@ public class cameraTest extends Activity {
     int countimg=0;
     List<Bitmap> listBitMap =null;
     LinearLayout llimglayout=null;
+    Context context=null;
 
     private Camera getCameraInstance() {
         Camera camera = null;
@@ -123,11 +131,46 @@ public class cameraTest extends Activity {
                 imgView.setId(countimg);
 
                 String pathT = "/sdcard/Pictures/CamSmartTemplate/"+_name;
-                Bitmap myBitmap = BitmapFactory.decodeFile(pathT);
+                final Bitmap myBitmap = BitmapFactory.decodeFile(pathT);
 
                 imgView.setImageBitmap(Utils.getResizedBitmap(myBitmap,100,100));
 
+                if(mapBitMap==null){
+                    mapBitMap=new HashMap();
+                }
+
+                mapBitMap.put(countimg,myBitmap);
+
+                context=cameraTest.this;
+
+                imgView.setOnClickListener(new View.OnClickListener() {
+                                               public void onClick(View v) {
+                                                   //set up dialog
+                                                   Dialog dialog = new Dialog(context);
+                                                   dialog.setContentView(R.layout.maindialog);
+                                                   dialog.setTitle("This is my custom dialog box");
+                                                   dialog.setCancelable(false);
+
+                                                   //there are a lot of settings, for dialog, check them all out!
+
+
+
+                                                   String pathT = "/sdcard/Pictures/CamSmartTemplate/IMG_20150603_005412.jpg";
+                                                   //set up image view
+                                                   ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
+                                                   //Bitmap myBitmap = BitmapFactory.decodeFile(pathT);
+                                                   //img.setImageBitmap(Utils.getResizedBitmap(myBitmap,80,80));
+
+                                                   img.setImageBitmap(getSelectedImageBitMap(v.getId()));
+
+
+
+                                                   dialog.show();
+                                               }
+                                           });
+
                 llimglayout.addView(imgView);
+
 
                // llPreview.addView(llimglayout);
                 //llPreview.refreshDrawableState();
@@ -143,6 +186,10 @@ public class cameraTest extends Activity {
         }
 
     };
+
+    public  Bitmap getSelectedImageBitMap(int key){
+        return (Bitmap)mapBitMap.get(key);
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -185,7 +232,6 @@ public class cameraTest extends Activity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_"+ timeStamp + ".jpg");
 
-
         return mediaFile;
 
     }
@@ -215,8 +261,6 @@ public class cameraTest extends Activity {
 
     @SuppressLint({ "SdCardPath", "SimpleDateFormat" })
     public void onClickTake(View v) throws InterruptedException {
-
-
         p = mCamera.getParameters();
         //		CameraParam camObject = SetCameraParameter();
 
@@ -228,11 +272,6 @@ public class cameraTest extends Activity {
             flashMood = "on";
             p.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
         }
-
-
-        //  p.setExposureCompensation(camObject.getExposureValue());
-        //p.setMeteringAreas(camObject.getMeetring());
-        // p.setWhiteBalance(WhiteBalance);
 
         mCamera.setParameters(p);
         // mCamera.startPreview();

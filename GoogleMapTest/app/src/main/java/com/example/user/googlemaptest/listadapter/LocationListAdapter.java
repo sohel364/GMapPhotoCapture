@@ -7,17 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-<<<<<<< HEAD
 import com.example.user.googlemaptest.R;
 import com.example.user.googlemaptest.model.Address;
 
 import java.util.List;
-=======
-import com.example.user.googlemaptest.model.Address;
-
-import java.util.List;
-import com.example.user.googlemaptest.R;
->>>>>>> d1e8c2eaa67214a61210bda4c91ac04e2dc5c06b
 
 /**
  * Created by user on 5/31/2015.
