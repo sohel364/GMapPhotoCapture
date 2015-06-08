@@ -93,7 +93,7 @@ public class cameraTest extends Activity {
 
     private Camera getCameraInstance() {
         Camera camera = null;
-        countimg++;
+
         try {
 
             camera = Camera.open();
@@ -127,7 +127,7 @@ public class cameraTest extends Activity {
 
                 llimglayout = (LinearLayout)findViewById(id.linearLayout2);
                // llimglayout.setId(countimg+1);
-                ImageView imgView = new ImageView(getApplicationContext());
+                final ImageView imgView = new ImageView(getApplicationContext());
                 imgView.setId(countimg);
 
                 String pathT = "/sdcard/Pictures/CamSmartTemplate/"+_name;
@@ -149,7 +149,7 @@ public class cameraTest extends Activity {
                                                    Dialog dialog = new Dialog(context);
                                                    dialog.setContentView(R.layout.maindialog);
                                                    dialog.setTitle("This is my custom dialog box");
-                                                   dialog.setCancelable(false);
+                                                   dialog.setCancelable(true);
 
                                                    //there are a lot of settings, for dialog, check them all out!
 
@@ -161,13 +161,23 @@ public class cameraTest extends Activity {
                                                    //Bitmap myBitmap = BitmapFactory.decodeFile(pathT);
                                                    //img.setImageBitmap(Utils.getResizedBitmap(myBitmap,80,80));
 
-                                                   img.setImageBitmap(getSelectedImageBitMap(v.getId()));
-
-
-
+                                                   img.setImageBitmap(getSelectedImageBitMap(imgView.getId()));
                                                    dialog.show();
+
+
+
                                                }
                                            });
+
+
+                imgView.setOnLongClickListener(new View.OnLongClickListener() {
+
+                    @Override
+                    public boolean onLongClick(View v) {
+                        ToastPrint("Selected Image : "+imgView.getId());
+                        return true;
+                    }
+                });
 
                 llimglayout.addView(imgView);
 
@@ -282,6 +292,7 @@ public class cameraTest extends Activity {
         Context context = getApplicationContext();
         //CharSequence text = "FLASH MODE :"+p.getFlashMode()+"COLOR EFFECT :"+p.getColorEffect()+"EXPOSOUR : "+p.getExposureCompensation();
         CharSequence text = "Captured !";
+        countimg++;
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);
