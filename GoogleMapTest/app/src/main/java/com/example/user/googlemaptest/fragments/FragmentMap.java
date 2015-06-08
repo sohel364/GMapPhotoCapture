@@ -111,7 +111,7 @@ public class FragmentMap extends BaseFragment{
                 if (zoomLevel > maxZoomLevel - 7.1) {
                     getLatitudeLongitudeFourCorners();
 
-                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(latMin,latMax,longMin,longMax);
+                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(latMin,latMax,longMin,longMax,2);
                     asyncTaskHelper.execute(FragmentMap.this, null, null);
 
                 }

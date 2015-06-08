@@ -1,4 +1,5 @@
 package com.example.user.googlemaptest.Utilities;
+
 import android.annotation.TargetApi;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -6,6 +7,7 @@ import android.util.Log;
 
 import com.example.user.googlemaptest.fragments.BaseFragment;
 import com.example.user.googlemaptest.model.Address;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -23,16 +25,17 @@ import java.util.List;
 /**
  * Created by user on 5/24/2015.
  */
-public class AsyncTaskHelper extends AsyncTask<BaseFragment, String,String>{
+public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
 
     private BaseFragment mFragmentMap;
     private List<Address> mAddressList;
     private String urlString;
 
 
-    public AsyncTaskHelper(Double latMin, Double latMax, Double longMin, Double longMax) {
-        urlString = "http://inzaana.com/WebBuilder/lon_lat_service.php?long_min="+longMin+"&long_max="
-                +longMax+"&lat_min="+latMin+"&lat_max="+latMax;
+    public AsyncTaskHelper(Double latMin, Double latMax, Double longMin, Double longMax, Integer status) {
+        urlString = "http://inzaana.com/WebBuilder/lon_lat_service.php?long_min=" + longMin + "&long_max="
+                + longMax + "&lat_min=" + latMin + "&lat_max=" + latMax + "&status=" + status;
+        Log.e(Utils.TAG_LOG,urlString);
     }
 
     @Override
@@ -57,6 +60,10 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String,String>{
         mFragmentMap.executeAsyncTaskCallBack(mAddressList);
     }
 
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+    }
 
     public void HttpResponseData() throws IOException {
         try {
@@ -73,16 +80,16 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String,String>{
         //  return lstString;
     }
 
-    private  void readStream(InputStream in) {
+    private void readStream(InputStream in) {
         Log.d(Utils.TAG_LOG, "Starting The data loading operation");
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(in,  "UTF-8"), 8);
+            reader = new BufferedReader(new InputStreamReader(in, "UTF-8"), 8);
             String line = "";
             while ((line = reader.readLine()) != null) {
                 //Log.e(Utils.TAG_LOG, line);
-                if(line != null && line.trim().length()>3) {
-                    //Log.e(Utils.TAG_LOG, line);
+                if (line != null && line.trim().length() > 3) {
+                    Log.e(Utils.TAG_LOG, line);
                     convertJsonToObject(line);
                 }
             }
@@ -116,10 +123,24 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String,String>{
                     Double latitude, longitude;
                     id = jObject.getLong("id");
                     name = jObject.getString("name");
-                    latitude = jObject.getDouble("latitude");
-                    longitude = jObject.getDouble("longitude");
+                    String lat = jObject.getString("latitude");
+                    String longi = jObject.getString("longitude");
+                    //Log.e(Utils.TAG_LOG, lat);
+                    try {
+                        latitude = new Double(lat);//jObject.getDouble("latitude");
+                        longitude = new Double(longi);
+                    } catch (Exception e) {
+                        latitude = 0.0;
+                        longitude = 0.0;
+                        Log.e(Utils.TAG_LOG, lat);
+                        Log.e(Utils.TAG_LOG, longi);
+                        Log.e(Utils.TAG_LOG, e.toString());
+                        e.printStackTrace();
+                    }
+
+                    //longitude = jObject.getDouble("longitude");
                     //Log.e(Utils.TAG_LOG,id+name+latitude+longitude);
-                    mAddressList.add(new Address(id, name, latitude,longitude));
+                    mAddressList.add(new Address(id, name, latitude, longitude));
                 }
             }
         } catch (Exception e){

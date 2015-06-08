@@ -6,7 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidplot.pie.PieChart;
@@ -32,6 +37,11 @@ public class FragmentGraph extends BaseFragment{
     private ListView mListViewLocations;
     private PieChart mPiechart;
     private LocationListAdapter mLocationListAdapter;
+    private Spinner mSpinnerPlaceTypes;
+    private RelativeLayout mLoadingPanel;
+    private TextView mTvLoadingMsg;
+    private TextView mTvFakeSpace;
+    private AsyncTaskHelper mAsyncTaskHelper;
 
     @Nullable
     @Override
@@ -47,14 +57,58 @@ public class FragmentGraph extends BaseFragment{
     private void initView(View view) {
         mPiechart = (PieChart) view.findViewById(R.id.mySimplePieChart);
         mListViewLocations = (ListView) view.findViewById(R.id.list_view_locations);
+        mListViewLocations.setVisibility(View.GONE);
         mLocationListAdapter = null;
 
+        mSpinnerPlaceTypes = (Spinner) view.findViewById(R.id.spinner_place_types);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.place_type_array,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerPlaceTypes.setAdapter(adapter);
+
+        mLoadingPanel = (RelativeLayout) view.findViewById(R.id.loading_panel);
+
+        mTvLoadingMsg = (TextView) view.findViewById(R.id.text_view_loading_Message);
+        mTvLoadingMsg.setTextColor(Color.BLUE);
+        mTvLoadingMsg.setText("Loading...");
+
+        mTvFakeSpace = (TextView) view.findViewById(R.id.text_view_fake_space);
+        mTvFakeSpace.setVisibility(View.GONE);
+
+
         loadGraph();
-        loadLocationList();
+        //loadLocationList();
     }
 
     private void initListeners() {
+        mSpinnerPlaceTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0) {
+                    //Toast.makeText(getActivity().getApplicationContext(), "All", Toast.LENGTH_LONG).show();
+                    if(mAsyncTaskHelper != null) {
+                        mAsyncTaskHelper.cancel(true);
+                    }
+                    loadLocationList(2);
+                } else if(position == 1) {
+                    //Toast.makeText(getActivity().getApplicationContext(), "Completed", Toast.LENGTH_LONG).show();
+                    if(mAsyncTaskHelper != null) {
+                        mAsyncTaskHelper.cancel(true);
+                    }
+                    loadLocationList(2);
+                } else {
+                    //Toast.makeText(getActivity().getApplicationContext(), "Uncompleted", Toast.LENGTH_LONG).show();
+                    if(mAsyncTaskHelper != null) {
+                        mAsyncTaskHelper.cancel(true);
+                    }
+                    loadLocationList(2);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void loadGraph(){
@@ -73,12 +127,18 @@ public class FragmentGraph extends BaseFragment{
     }
 
 
-    public void loadLocationList() {
+    public void loadLocationList(Integer status) {
+        mListViewLocations.setVisibility(View.GONE);
+        mLoadingPanel.setVisibility(View.VISIBLE);
         if(Utils.isInternetConnected(getActivity().getApplicationContext())) {
-            AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(-90.0,90.0,-180.0,180.0);
-            asyncTaskHelper.execute(FragmentGraph.this);
+            mAsyncTaskHelper = new AsyncTaskHelper(-90.0,90.0,-180.0,180.0, status);
+            mAsyncTaskHelper.execute(FragmentGraph.this);
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "Please enable data connection or WiFi to access internet",Toast.LENGTH_LONG).show();
+            mLoadingPanel.setVisibility(View.GONE);
+            mTvLoadingMsg.setText("Please enable data connection or WiFi to access internet");
+            mTvLoadingMsg.setTextColor(Color.RED);
+            mTvFakeSpace.setVisibility(View.VISIBLE);
         }
 
     }
@@ -87,5 +147,10 @@ public class FragmentGraph extends BaseFragment{
     public void executeAsyncTaskCallBack(List<Address> addressList) {
         mLocationListAdapter = new LocationListAdapter(addressList, getActivity());
         mListViewLocations.setAdapter(mLocationListAdapter);
+
+        mListViewLocations.setVisibility(View.VISIBLE);
+        mTvLoadingMsg.setVisibility(View.GONE);
+        mLoadingPanel.setVisibility(View.GONE);
+        mTvFakeSpace.setVisibility(View.GONE);
     }
 }

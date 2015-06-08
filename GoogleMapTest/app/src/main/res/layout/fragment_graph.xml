@@ -1,33 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Graph"
+        android:textColor="@color/Black"
         android:textSize="40dp"
-        android:textStyle="bold"
-        android:textColor="@color/Black"/>
+        android:textStyle="bold" />
 
 
     <com.androidplot.pie.PieChart
         android:id="@+id/mySimplePieChart"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        androidPlot.title="A Simple XY Plot"
         androidPlot.domainLabel="Domain"
         androidPlot.rangeLabel="Range"
-        android:layout_weight="1"/>
+        androidPlot.title="A Simple XY Plot"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <ListView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="List of Places"
+        android:textColor="@color/Black"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Place Type: "
+            android:textColor="@color/Black"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/spinner_place_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/text_view_loading_Message"
+        android:layout_gravity="center_horizontal"/>
+
+    <RelativeLayout
+        android:id="@+id/loading_panel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
+
+    <ListView
         android:id="@+id/list_view_locations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="2">
 
     </ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone"
+        android:id="@+id/text_view_fake_space"/>
 
 </LinearLayout>
