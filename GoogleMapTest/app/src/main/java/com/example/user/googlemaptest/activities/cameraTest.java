@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +92,7 @@ public class cameraTest extends Activity {
     List<Bitmap> listBitMap =null;
     LinearLayout llimglayout=null;
     Context context=null;
+    List<CheckBox> listOfCheckControls=null;
 
     private Camera getCameraInstance() {
         Camera camera = null;
@@ -130,6 +133,18 @@ public class cameraTest extends Activity {
                 final ImageView imgView = new ImageView(getApplicationContext());
                 imgView.setId(countimg);
 
+                if(listOfCheckControls==null){
+                    listOfCheckControls=new ArrayList<>();
+                }
+
+                context=cameraTest.this;
+
+                final CheckBox chkBox = new CheckBox(context);
+                chkBox.setId(countimg+1);
+                chkBox.setVisibility(View.INVISIBLE);
+
+                listOfCheckControls.add(chkBox);
+
                 String pathT = "/sdcard/Pictures/CamSmartTemplate/"+_name;
                 final Bitmap myBitmap = BitmapFactory.decodeFile(pathT);
 
@@ -141,7 +156,7 @@ public class cameraTest extends Activity {
 
                 mapBitMap.put(countimg,myBitmap);
 
-                context=cameraTest.this;
+
 
                 imgView.setOnClickListener(new View.OnClickListener() {
                                                public void onClick(View v) {
@@ -150,11 +165,7 @@ public class cameraTest extends Activity {
                                                    dialog.setContentView(R.layout.maindialog);
                                                    dialog.setTitle("This is my custom dialog box");
                                                    dialog.setCancelable(true);
-
                                                    //there are a lot of settings, for dialog, check them all out!
-
-
-
                                                    String pathT = "/sdcard/Pictures/CamSmartTemplate/IMG_20150603_005412.jpg";
                                                    //set up image view
                                                    ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
@@ -175,12 +186,25 @@ public class cameraTest extends Activity {
                     @Override
                     public boolean onLongClick(View v) {
                         ToastPrint("Selected Image : "+imgView.getId());
+
+                        for (CheckBox chnkbox:listOfCheckControls){
+                            chnkbox.setVisibility(View.VISIBLE);
+                            if(imgView.getId()==chnkbox.getId()-1){
+                                if(chnkbox.isChecked()){
+                                    chnkbox.setChecked(false);
+                                }
+                                else{
+                                    chnkbox.setChecked(true);
+                                }
+                            }
+                        }
+
                         return true;
                     }
                 });
 
                 llimglayout.addView(imgView);
-
+                llimglayout.addView(chkBox);
 
                // llPreview.addView(llimglayout);
                 //llPreview.refreshDrawableState();

@@ -77,6 +77,8 @@ public class FragmentMap extends BaseFragment{
 
         }
 
+
+
         initView();
         initListeners();
 
