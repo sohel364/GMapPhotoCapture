@@ -5,4 +5,13 @@
         <item>Completed</item>
         <item>Uncompleted</item>
     </string-array>
+
+    <string-array name="city_array">
+        <item>Select City</item>
+        <item>Delhi</item>
+        <item>Mumbai</item>
+        <item>Chennai</item>
+        <item>Calcutta</item>
+        <item>Pune</item>
+    </string-array>
 </resources>

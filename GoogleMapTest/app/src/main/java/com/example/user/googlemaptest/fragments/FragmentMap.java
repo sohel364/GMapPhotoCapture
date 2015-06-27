@@ -17,6 +17,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
@@ -57,6 +61,10 @@ public class FragmentMap extends BaseFragment{
     private double latMin;
     private double longMax;
     private double longMin;
+
+    private Spinner mSpinnerCity;
+    private EditText mEditPostCode;
+    private Button mBtnSearch;
 
     Long id;
 
@@ -99,6 +107,16 @@ public class FragmentMap extends BaseFragment{
             loadCurrentLocationMap();
             //Toast.makeText(getActivity().getApplicationContext(), "Map fragment cannot be found", Toast.LENGTH_LONG).show();
         }
+
+        mSpinnerCity = (Spinner)mView.findViewById(R.id.spinner_city);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.city_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerCity.setAdapter(adapter);
+
+        mEditPostCode = (EditText) mView.findViewById(R.id.text_post_code);
+
+        mBtnSearch = (Button) mView.findViewById(R.id.button_search);
+
     }
 
     private void initListeners() {
@@ -113,7 +131,7 @@ public class FragmentMap extends BaseFragment{
                 if (zoomLevel > maxZoomLevel - 7.1) {
                     getLatitudeLongitudeFourCorners();
 
-                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(latMin,latMax,longMin,longMax,2);
+                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(latMin, latMax, longMin, longMax, 2);
                     asyncTaskHelper.execute(FragmentMap.this, null, null);
 
                 }
@@ -136,16 +154,22 @@ public class FragmentMap extends BaseFragment{
                 id = mMarkerHash.get(marker);
                 // camera start here
                 //startActivityForResult(intent, Utils.CAMERA_REQUEST);
-                Toast.makeText(getActivity().getApplicationContext(),"Clicked for camera",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Clicked for camera", Toast.LENGTH_LONG).show();
                 try {
                     Intent _intent = new Intent(getActivity().getApplicationContext(), cameraTest.class);
                     startActivity(_intent);
-                }
-                catch (Exception ex){
-                    Toast.makeText(getActivity().getApplicationContext(),ex.toString(),Toast.LENGTH_LONG).show();
-                       ex.printStackTrace();
+                } catch (Exception ex) {
+                    Toast.makeText(getActivity().getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
                 }
 
+            }
+        });
+
+        mBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchLocations();
             }
         });
     }
@@ -273,9 +297,9 @@ public class FragmentMap extends BaseFragment{
             longMin = vr.nearLeft.longitude;
         }
         Log.e(sTagName, "Max Latitude: "+latMax);
-        Log.e(sTagName, "Min Latitude: "+latMin);
-        Log.e(sTagName, "Max Longitude: "+longMax);
-        Log.e(sTagName, "Min Longitude: "+longMin);
+        Log.e(sTagName, "Min Latitude: " + latMin);
+        Log.e(sTagName, "Max Longitude: " + longMax);
+        Log.e(sTagName, "Min Longitude: " + longMin);
     }
 
     private MarkerOptions createMarkerOptionsByLatLng(LatLng latLng, String title, String snippet) {
@@ -305,8 +329,34 @@ public class FragmentMap extends BaseFragment{
         }
     }
 
+    private void searchLocations() {
+        int position = mSpinnerCity.getSelectedItemPosition();
+        String city = mSpinnerCity.getSelectedItem().toString();
+        String code = mEditPostCode.getText().toString();
+/*
+        if(!Utils.isInternetConnected(getActivity().getApplicationContext())) {
+            Utils.createOKDialog(getActivity(), "Internet Connection!!!", "There is no internet connection available. Please enable Wifi or Data connection for better use of the map.");
+            return;
+        }*/
+
+        if(position == 0) {
+            Utils.createOKDialog(getActivity(), "Alert!!!", "Please select a city.");
+            return;
+        }
+        if(code.length()<= 0) {
+            Utils.createOKDialog(getActivity(), "Alert!!!", "Please enter a city code.");
+            return;
+        }
+
+        AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(city, code);
+        asyncTaskHelper.execute(FragmentMap.this, null, null);
+    }
+
     @Override
     public void executeAsyncTaskCallBack(List<Address> addressList) {
+        if(addressList == null || addressList.size() <= 0) {
+            Toast.makeText(getActivity().getApplicationContext(), "No place found to load in map!!!",Toast.LENGTH_LONG).show();
+        }
         loadAddressMarkers(addressList);
     }
 }

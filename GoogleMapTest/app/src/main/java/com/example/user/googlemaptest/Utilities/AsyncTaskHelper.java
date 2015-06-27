@@ -38,6 +38,12 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
         Log.e(Utils.TAG_LOG,urlString);
     }
 
+    public AsyncTaskHelper(String city, String postCode) {
+        urlString = "http://inzaana.com/WebBuilder/lon_lat_service.php?city=" + city + "&codt="
+                + postCode;
+        Log.e(Utils.TAG_LOG, urlString);
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
