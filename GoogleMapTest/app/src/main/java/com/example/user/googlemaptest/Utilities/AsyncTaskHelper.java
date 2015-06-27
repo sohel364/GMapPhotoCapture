@@ -33,14 +33,13 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
 
 
     public AsyncTaskHelper(Double latMin, Double latMax, Double longMin, Double longMax, Integer status) {
-        urlString = "http://inzaana.com/WebBuilder/lon_lat_service.php?long_min=" + longMin + "&long_max="
+        urlString = Utils.SERVICE_URL+"long_min=" + longMin + "&long_max="
                 + longMax + "&lat_min=" + latMin + "&lat_max=" + latMax + "&status=" + status;
         Log.e(Utils.TAG_LOG,urlString);
     }
 
     public AsyncTaskHelper(String city, String postCode) {
-        urlString = "http://inzaana.com/WebBuilder/lon_lat_service.php?city=" + city + "&codt="
-                + postCode;
+        urlString = Utils.SERVICE_URL+"city=" + city + "&code=" + postCode;
         Log.e(Utils.TAG_LOG, urlString);
     }
 

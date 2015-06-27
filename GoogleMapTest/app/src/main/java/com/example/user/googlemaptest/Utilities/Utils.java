@@ -18,6 +18,7 @@ public class Utils {
 
     public static final String TAG_LOG = "GoogleMapTest";
     public static final int CAMERA_REQUEST = 111;
+    public static final String SERVICE_URL = "http://inzaana.com/WebBuilder/lon_lat_service.php?";
 
     public static void turnGPSOn(Context context)
     {
