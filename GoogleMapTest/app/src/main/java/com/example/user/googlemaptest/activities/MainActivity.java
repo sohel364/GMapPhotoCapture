@@ -1,5 +1,7 @@
 package com.example.user.googlemaptest.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -9,8 +11,10 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
+import com.example.user.googlemaptest.Utilities.Utils;
 import com.example.user.googlemaptest.fragments.FragmentGraph;
 import com.example.user.googlemaptest.fragments.FragmentMap;
+import com.example.user.googlemaptest.fragments.FragmentUserInfo;
 
 
 public class MainActivity extends FragmentActivity {
@@ -38,9 +42,18 @@ public class MainActivity extends FragmentActivity {
                 FragmentGraph.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Map").setIndicator("Map"),
                 FragmentMap.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("User Info").setIndicator("User Info"),
+                FragmentUserInfo.class, null);
 
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(Utils.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        String sharedCode = sharedPreferences.getString(Utils.SHARED_KEY_CODE, "");
+        if(sharedCode == null || sharedCode.length()<=0) {
+            sharedPreferences.edit().putString(Utils.SHARED_KEY_CODE, "master").commit();
+        }
+
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
     }
 

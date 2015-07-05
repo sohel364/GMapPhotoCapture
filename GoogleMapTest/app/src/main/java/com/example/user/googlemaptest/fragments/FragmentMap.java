@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.location.Criteria;
 import android.location.Location;
@@ -62,9 +63,11 @@ public class FragmentMap extends BaseFragment{
     private double longMax;
     private double longMin;
 
-    private Spinner mSpinnerCity;
+    /*private Spinner mSpinnerCity;
     private EditText mEditPostCode;
-    private Button mBtnSearch;
+    private Button mBtnSearch;*/
+
+    private String userName;
 
     Long id;
 
@@ -108,19 +111,25 @@ public class FragmentMap extends BaseFragment{
             //Toast.makeText(getActivity().getApplicationContext(), "Map fragment cannot be found", Toast.LENGTH_LONG).show();
         }
 
-        mSpinnerCity = (Spinner)mView.findViewById(R.id.spinner_city);
+        /*mSpinnerCity = (Spinner)mView.findViewById(R.id.spinner_city);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.city_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerCity.setAdapter(adapter);
 
         mEditPostCode = (EditText) mView.findViewById(R.id.text_post_code);
 
-        mBtnSearch = (Button) mView.findViewById(R.id.button_search);
+        mBtnSearch = (Button) mView.findViewById(R.id.button_search);*/
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Utils.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        userName = sharedPreferences.getString(Utils.SHARED_KEY_USER_ID, "");
+
+        AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(userName);
+        asyncTaskHelper.execute(FragmentMap.this, null, null);
 
     }
 
     private void initListeners() {
-        mGoogleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+        /*mGoogleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
                 //mGoogleMap.clear();
@@ -136,7 +145,7 @@ public class FragmentMap extends BaseFragment{
 
                 }
             }
-        });
+        });*/
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -166,12 +175,12 @@ public class FragmentMap extends BaseFragment{
             }
         });
 
-        mBtnSearch.setOnClickListener(new View.OnClickListener() {
+        /*mBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchLocations();
             }
-        });
+        });*/
     }
 
 
@@ -185,7 +194,7 @@ public class FragmentMap extends BaseFragment{
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void clearUnnecessaryMarkers() {
+    /*private void clearUnnecessaryMarkers() {
         Iterator it = mMarkerHash.entrySet().iterator();
         while(it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
@@ -197,7 +206,7 @@ public class FragmentMap extends BaseFragment{
                 it.remove();
             }
         }
-    }
+    }*/
 
     private void loadCurrentLocationMap() {
         LocationManager service = (LocationManager) getActivity().getSystemService(Activity.LOCATION_SERVICE);
@@ -317,7 +326,7 @@ public class FragmentMap extends BaseFragment{
         if(addressList == null || addressList.size() <= 0) {
             return;
         }
-        clearUnnecessaryMarkers();
+        /*clearUnnecessaryMarkers();*/
         int limit = addressList.size();
         for(int i = 0; i<limit; i++) {
             Address address = addressList.get(i);
@@ -327,17 +336,19 @@ public class FragmentMap extends BaseFragment{
 
             mMarkerHash.put(marker, address.getId());
         }
+
+        Toast.makeText(getActivity(), "Map markers are being loaded!!!", Toast.LENGTH_LONG).show();
     }
 
-    private void searchLocations() {
+    /*private void searchLocations() {
         int position = mSpinnerCity.getSelectedItemPosition();
         String city = mSpinnerCity.getSelectedItem().toString();
         String code = mEditPostCode.getText().toString();
-/*
-        if(!Utils.isInternetConnected(getActivity().getApplicationContext())) {
-            Utils.createOKDialog(getActivity(), "Internet Connection!!!", "There is no internet connection available. Please enable Wifi or Data connection for better use of the map.");
-            return;
-        }*/
+
+        //if(!Utils.isInternetConnected(getActivity().getApplicationContext())) {
+        //    Utils.createOKDialog(getActivity(), "Internet Connection!!!", "There is no internet connection available. Please enable Wifi or Data connection for better use of the map.");
+        //    return;
+        //}
 
         if(position == 0) {
             Utils.createOKDialog(getActivity(), "Alert!!!", "Please select a city.");
@@ -350,7 +361,7 @@ public class FragmentMap extends BaseFragment{
 
         AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(city, code);
         asyncTaskHelper.execute(FragmentMap.this, null, null);
-    }
+    }*/
 
     @Override
     public void executeAsyncTaskCallBack(List<Address> addressList) {

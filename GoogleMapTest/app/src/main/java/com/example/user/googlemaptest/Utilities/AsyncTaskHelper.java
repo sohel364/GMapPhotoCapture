@@ -43,6 +43,14 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
         Log.e(Utils.TAG_LOG, urlString);
     }
 
+    public AsyncTaskHelper(String userName) {
+        urlString = Utils.SERVICE_URL + "assigned_user="+userName;
+    }
+
+    public AsyncTaskHelper(int status) {
+        urlString = Utils.SERVICE_URL + "status="+status;
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -73,6 +81,7 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
     public void HttpResponseData() throws IOException {
         try {
             //"http://inzaana.com/WebBuilder/lon_lat_service.php?long_min=77.10&long_max=77.15&lat_min=28.40&lat_max=28.45"
+            Log.e(Utils.TAG_LOG, "UrlString: "+urlString);
             URL url = new URL(urlString);
             HttpURLConnection con = (HttpURLConnection) url
                     .openConnection();
@@ -116,7 +125,7 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
     private void convertJsonToObject(String jsonString) {
         try {
             mAddressList = new ArrayList<Address>();
-            //Log.e(Utils.TAG_LOG, jsonString);
+            Log.e(Utils.TAG_LOG, jsonString);
             JSONObject jsonObject = new JSONObject(jsonString);
             Iterator<?> keys = jsonObject.keys();
             while( keys.hasNext() ) {
@@ -128,8 +137,8 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
                     Double latitude, longitude;
                     id = jObject.getLong("id");
                     name = jObject.getString("name");
-                    String lat = jObject.getString("latitude");
-                    String longi = jObject.getString("longitude");
+                    String longi = jObject.getString("latitude");
+                    String  lat= jObject.getString("longitude");
                     //Log.e(Utils.TAG_LOG, lat);
                     try {
                         latitude = new Double(lat);//jObject.getDouble("latitude");
@@ -144,7 +153,7 @@ public class AsyncTaskHelper extends AsyncTask<BaseFragment, String, String> {
                     }
 
                     //longitude = jObject.getDouble("longitude");
-                    //Log.e(Utils.TAG_LOG,id+name+latitude+longitude);
+                    Log.e(Utils.TAG_LOG,id+name+latitude+longitude);
                     mAddressList.add(new Address(id, name, latitude, longitude));
                 }
             }

@@ -88,13 +88,13 @@ public class FragmentGraph extends BaseFragment{
                     if(mAsyncTaskHelper != null) {
                         mAsyncTaskHelper.cancel(true);
                     }
-                    loadLocationList(2);
+                    loadLocationList(0);
                 } else if(position == 1) {
                     //Toast.makeText(getActivity().getApplicationContext(), "Completed", Toast.LENGTH_LONG).show();
                     if(mAsyncTaskHelper != null) {
                         mAsyncTaskHelper.cancel(true);
                     }
-                    loadLocationList(2);
+                    loadLocationList(1);
                 } else {
                     //Toast.makeText(getActivity().getApplicationContext(), "Uncompleted", Toast.LENGTH_LONG).show();
                     if(mAsyncTaskHelper != null) {
@@ -131,7 +131,7 @@ public class FragmentGraph extends BaseFragment{
         mListViewLocations.setVisibility(View.GONE);
         mLoadingPanel.setVisibility(View.VISIBLE);
         if(Utils.isInternetConnected(getActivity().getApplicationContext())) {
-            mAsyncTaskHelper = new AsyncTaskHelper(-90.0,90.0,-180.0,180.0, status);
+            mAsyncTaskHelper = new AsyncTaskHelper(status);
             mAsyncTaskHelper.execute(FragmentGraph.this);
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "Please enable data connection or WiFi to access internet",Toast.LENGTH_LONG).show();
@@ -145,9 +145,18 @@ public class FragmentGraph extends BaseFragment{
 
     @Override
     public void executeAsyncTaskCallBack(List<Address> addressList) {
+        if(addressList == null || addressList.size()<=0) {
+            Toast.makeText(getActivity(), "No data found", Toast.LENGTH_LONG).show();
+            setUIVisibility();
+            return;
+        }
         mLocationListAdapter = new LocationListAdapter(addressList, getActivity());
         mListViewLocations.setAdapter(mLocationListAdapter);
 
+        setUIVisibility();
+    }
+
+    private void setUIVisibility() {
         mListViewLocations.setVisibility(View.VISIBLE);
         mTvLoadingMsg.setVisibility(View.GONE);
         mLoadingPanel.setVisibility(View.GONE);
