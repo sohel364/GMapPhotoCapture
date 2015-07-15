@@ -15,11 +15,19 @@ import com.example.user.googlemaptest.Utilities.Utils;
 import com.example.user.googlemaptest.fragments.FragmentGraph;
 import com.example.user.googlemaptest.fragments.FragmentMap;
 import com.example.user.googlemaptest.fragments.FragmentUserInfo;
+import com.example.user.googlemaptest.fragments.containers.FragmentContainerBase;
+import com.example.user.googlemaptest.fragments.containers.FragmentContainerGraph;
+import com.example.user.googlemaptest.fragments.containers.FragmentContainerMap;
+import com.example.user.googlemaptest.fragments.containers.FragmentContainerUserInfo;
 
 
 public class MainActivity extends FragmentActivity {
 
     private FragmentTabHost mTabHost;
+
+    private static final String TAB_1_TAG = "graph";
+    private static final String TAB_2_TAG = "map";
+    private static final String TAB_3_TAG = "user_info";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +46,12 @@ public class MainActivity extends FragmentActivity {
         }
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec("Graph").setIndicator("Graph"),
-                FragmentGraph.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("Map").setIndicator("Map"),
-                FragmentMap.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("User Info").setIndicator("User Info"),
-                FragmentUserInfo.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator("Graph"),
+                FragmentContainerGraph.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator("Map"),
+                FragmentContainerMap.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator("User Info"),
+                FragmentContainerUserInfo.class, null);
 
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
@@ -55,6 +63,23 @@ public class MainActivity extends FragmentActivity {
         }
 
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        boolean isPopFragment = false;
+        String currentTabTag = mTabHost.getCurrentTabTag();
+        if (currentTabTag.equals(TAB_1_TAG)) {
+            isPopFragment = ((FragmentContainerBase)getSupportFragmentManager().findFragmentByTag(TAB_1_TAG)).popFragment();
+        } else if (currentTabTag.equals(TAB_2_TAG)) {
+            isPopFragment = ((FragmentContainerBase)getSupportFragmentManager().findFragmentByTag(TAB_2_TAG)).popFragment();
+        } else if (currentTabTag.equals(TAB_3_TAG)) {
+            isPopFragment = ((FragmentContainerBase)getSupportFragmentManager().findFragmentByTag(TAB_3_TAG)).popFragment();
+        }
+        if (!isPopFragment) {
+            finish();
+        }
     }
 
     @Override

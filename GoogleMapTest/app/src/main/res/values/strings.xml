@@ -6,4 +6,7 @@
     <string name="title_activity_camera_test">cameraTest</string>
     <string name="imgbtn">imgbtn</string>
     <string name="imgprvwpanel">imgpreviewpanel</string>
+    <string name="pin_message_loading">Loading your assigned pin codes</string>
+    <string name="pin_message_assigned_pins">You are assigned to below pin codes. Please tap in one of the below pin codes to load in map.</string>
+    <string name="pin_message_not_found">You are not assigned to any pin codes</string>
 </resources>

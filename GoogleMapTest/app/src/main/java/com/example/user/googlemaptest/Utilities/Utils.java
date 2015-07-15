@@ -18,7 +18,8 @@ public class Utils {
 
     public static final String TAG_LOG = "GoogleMapTest";
     public static final int CAMERA_REQUEST = 111;
-    public static final String SERVICE_URL = "http://spacetotest.com/dev_v1.0/lat_long_service_assigned_user.php?";
+    public static final String SERVICE_URL_ADDRESS_LATLON = "http://spinelbd.com/tamal/services/android_photo_capture/lat_long_service_assigned_user.php?";//"http://spacetotest.com/dev_v1.0/lat_long_service_assigned_user.php?";
+    public static final String SERVICE_URL_ADDRESS_PIN = "http://spinelbd.com/tamal/services/android_photo_capture/pin_code_service_assigned_user.php?";
     public static final String SHARED_PREFERENCE_NAME = "com.example.user.googlemaptest";
     public static final String SHARED_KEY_CODE = "shared_key_code";
     public static final String SHARED_KEY_USER_ID = "shared_key_user_id";

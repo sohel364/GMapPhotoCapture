@@ -18,30 +18,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
-import com.example.user.googlemaptest.Utilities.AsyncTaskHelper;
+import com.example.user.googlemaptest.Utilities.AsyncLoaderAddress;
+import com.example.user.googlemaptest.Utilities.AsyncLoaderAddressLatLon;
 import com.example.user.googlemaptest.Utilities.Utils;
 import com.example.user.googlemaptest.activities.cameraTest;
-import com.example.user.googlemaptest.model.Address;
+import com.example.user.googlemaptest.model.AddressBase;
+import com.example.user.googlemaptest.model.AddressLatLon;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by user on 5/20/2015.
@@ -68,6 +63,7 @@ public class FragmentMap extends BaseFragment{
     private Button mBtnSearch;*/
 
     private String userName;
+    private String mPinCode;
 
     Long id;
 
@@ -88,6 +84,12 @@ public class FragmentMap extends BaseFragment{
 
         }
 
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            mPinCode = bundle.getString(BUNDLE_KEY_PIN_CODE);
+        } else {
+            mPinCode = "";
+        }
 
 
         initView();
@@ -123,7 +125,12 @@ public class FragmentMap extends BaseFragment{
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Utils.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         userName = sharedPreferences.getString(Utils.SHARED_KEY_USER_ID, "");
 
-        AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(userName);
+        AsyncLoaderAddress asyncTaskHelper;// = new AsyncLoaderAddressLatLon(userName);
+        if(mPinCode != null && mPinCode.length() > 0) {
+            asyncTaskHelper = new AsyncLoaderAddressLatLon(userName, mPinCode);
+        } else {
+            asyncTaskHelper = new AsyncLoaderAddressLatLon(userName);
+        }
         asyncTaskHelper.execute(FragmentMap.this, null, null);
 
     }
@@ -140,7 +147,7 @@ public class FragmentMap extends BaseFragment{
                 if (zoomLevel > maxZoomLevel - 7.1) {
                     getLatitudeLongitudeFourCorners();
 
-                    AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(latMin, latMax, longMin, longMax, 2);
+                    AsyncLoaderAddress asyncTaskHelper = new AsyncLoaderAddress(latMin, latMax, longMin, longMax, 2);
                     asyncTaskHelper.execute(FragmentMap.this, null, null);
 
                 }
@@ -263,17 +270,24 @@ public class FragmentMap extends BaseFragment{
         if(location == null) {
             return;
         }
-        LatLng currentLatlong = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng currentLatLong = new LatLng(location.getLatitude(), location.getLongitude());
 
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(currentLatlong);
+        markerOptions.position(currentLatLong);
         markerOptions.snippet("Current Locations");
         markerOptions.title("Your Location");
         if(mGoogleMap != null) {
             mMarker = mGoogleMap.addMarker(markerOptions);
-            //mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F));
+            //mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15.0F));
 
-            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatlong, 15.0F), new GoogleMap.CancelableCallback() {
+            moveCameraToLocation(currentLatLong);
+            //getLatitudeLongitudeFourCorners();
+        }
+    }
+
+    private void moveCameraToLocation(LatLng latLng) {
+        if(mGoogleMap != null) {
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.0F), new GoogleMap.CancelableCallback() {
                 @Override
                 public void onFinish() {
                     getLatitudeLongitudeFourCorners();
@@ -284,7 +298,6 @@ public class FragmentMap extends BaseFragment{
 
                 }
             });
-            //getLatitudeLongitudeFourCorners();
         }
     }
 
@@ -322,19 +335,19 @@ public class FragmentMap extends BaseFragment{
         return markerOptions;
     }
 
-    public void loadAddressMarkers(List<Address> addressList) {
-        if(addressList == null || addressList.size() <= 0) {
+    public void loadAddressMarkers(List<AddressBase> addressLatLonList) {
+        if(addressLatLonList == null || addressLatLonList.size() <= 0) {
             return;
         }
         /*clearUnnecessaryMarkers();*/
-        int limit = addressList.size();
+        int limit = addressLatLonList.size();
         for(int i = 0; i<limit; i++) {
-            Address address = addressList.get(i);
-            MarkerOptions markerOptions = createMarkerOptionsByLatLng(new LatLng(address.getLatitude(),address.getLongitude()),
-                    address.getName(), "Tap Here to Take Picture");
+            AddressLatLon addressLatLon = (AddressLatLon) addressLatLonList.get(i);
+            MarkerOptions markerOptions = createMarkerOptionsByLatLng(new LatLng(addressLatLon.getLatitude(), addressLatLon.getLongitude()),
+                    addressLatLon.getName(), "Tap Here to Take Picture");
             Marker marker = mGoogleMap.addMarker(markerOptions);
 
-            mMarkerHash.put(marker, address.getId());
+            mMarkerHash.put(marker, addressLatLon.getId());
         }
 
         Toast.makeText(getActivity(), "Map markers are being loaded!!!", Toast.LENGTH_LONG).show();
@@ -359,15 +372,19 @@ public class FragmentMap extends BaseFragment{
             return;
         }
 
-        AsyncTaskHelper asyncTaskHelper = new AsyncTaskHelper(city, code);
+        AsyncLoaderAddress asyncTaskHelper = new AsyncLoaderAddress(city, code);
         asyncTaskHelper.execute(FragmentMap.this, null, null);
     }*/
 
     @Override
-    public void executeAsyncTaskCallBack(List<Address> addressList) {
-        if(addressList == null || addressList.size() <= 0) {
+    public void executeAsyncTaskCallBack(List<AddressBase> addressLatLonList) {
+        if(addressLatLonList == null || addressLatLonList.size() <= 0) {
             Toast.makeText(getActivity().getApplicationContext(), "No place found to load in map!!!",Toast.LENGTH_LONG).show();
+            return;
         }
-        loadAddressMarkers(addressList);
+        loadAddressMarkers(addressLatLonList);
+        AddressLatLon addressLatLon = (AddressLatLon)addressLatLonList.get(0);
+        LatLng latLng = new LatLng(addressLatLon.getLatitude(), addressLatLon.getLongitude());
+        moveCameraToLocation(latLng);
     }
 }

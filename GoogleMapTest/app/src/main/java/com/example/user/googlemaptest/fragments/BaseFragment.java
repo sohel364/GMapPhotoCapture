@@ -2,7 +2,7 @@ package com.example.user.googlemaptest.fragments;
 
 import android.support.v4.app.Fragment;
 
-import com.example.user.googlemaptest.model.Address;
+import com.example.user.googlemaptest.model.AddressBase;
 
 import java.util.List;
 
@@ -11,5 +11,6 @@ import java.util.List;
  */
 
 public abstract class BaseFragment extends Fragment{
-    public abstract void executeAsyncTaskCallBack(List<Address> addressList);
+    protected static final String BUNDLE_KEY_PIN_CODE = "BUNDLE_KEY_PIN_CODE";
+    public abstract void executeAsyncTaskCallBack(List<AddressBase> addressLatLonList);
 }

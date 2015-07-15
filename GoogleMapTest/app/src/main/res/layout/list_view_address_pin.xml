@@ -9,27 +9,27 @@
         android:visibility="gone"
         android:layout_weight="0"
         android:text="ddd"
-        android:id="@+id/text_view_location_id"/>
+        android:id="@+id/text_view_address_id"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_weight="4"
         android:text="ddd"
-        android:id="@+id/text_view_location_name"/>
+        android:id="@+id/text_view_address_name"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:text="ddd"
         android:paddingLeft="10dp"
-        android:id="@+id/text_view_location_latitude"/>
+        android:id="@+id/text_view_address_pin"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:text="ddd"
         android:paddingLeft="10dp"
-        android:id="@+id/text_view_location_longitude"/>
+        android:id="@+id/text_view_address_city"/>
 
 </LinearLayout>

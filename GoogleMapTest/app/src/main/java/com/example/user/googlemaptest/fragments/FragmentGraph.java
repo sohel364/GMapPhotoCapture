@@ -20,10 +20,11 @@ import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
 import com.androidplot.xy.XYPlot;
 import com.example.user.googlemaptest.R;
-import com.example.user.googlemaptest.Utilities.AsyncTaskHelper;
+import com.example.user.googlemaptest.Utilities.AsyncLoaderAddress;
+import com.example.user.googlemaptest.Utilities.AsyncLoaderAddressLatLon;
 import com.example.user.googlemaptest.Utilities.Utils;
-import com.example.user.googlemaptest.listadapter.LocationListAdapter;
-import com.example.user.googlemaptest.model.Address;
+import com.example.user.googlemaptest.listadapter.AdapterLocationList;
+import com.example.user.googlemaptest.model.AddressBase;
 
 import java.util.List;
 
@@ -35,30 +36,41 @@ public class FragmentGraph extends BaseFragment{
     private XYPlot mySimpleXYPlot;
 
     private ListView mListViewLocations;
-    private PieChart mPiechart;
-    private LocationListAdapter mLocationListAdapter;
+    private PieChart mPieChart;
+    private AdapterLocationList mAdapterLocationList;
     private Spinner mSpinnerPlaceTypes;
     private RelativeLayout mLoadingPanel;
     private TextView mTvLoadingMsg;
     private TextView mTvFakeSpace;
-    private AsyncTaskHelper mAsyncTaskHelper;
+    private static AsyncLoaderAddress mAsyncTaskHelper;
+    private static View mView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_graph, container, false);
+        if(mView == null) {
+            mView = inflater.inflate(R.layout.fragment_graph, container, false);
 
-        initView(view);
-        initListeners();
+            initView(mView);
+            initListeners();
+        }
 
-        return view;
+        return mView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        /*if(mAsyncTaskHelper != null) {
+            mAsyncTaskHelper.cancel(true);
+        }*/
     }
 
     private void initView(View view) {
-        mPiechart = (PieChart) view.findViewById(R.id.mySimplePieChart);
+        mPieChart = (PieChart) view.findViewById(R.id.mySimplePieChart);
         mListViewLocations = (ListView) view.findViewById(R.id.list_view_locations);
         mListViewLocations.setVisibility(View.GONE);
-        mLocationListAdapter = null;
+        mAdapterLocationList = null;
 
         mSpinnerPlaceTypes = (Spinner) view.findViewById(R.id.spinner_place_types);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.place_type_array,android.R.layout.simple_spinner_item);
@@ -113,16 +125,16 @@ public class FragmentGraph extends BaseFragment{
 
     private void loadGraph(){
 
-        mPiechart.getBackgroundPaint().setColor(Color.WHITE);
+        mPieChart.getBackgroundPaint().setColor(Color.WHITE);
 
         Segment seg0 = new Segment(" ", 2.0);
         Segment seg1 = new Segment(" ", 5);
         Segment seg2 = new Segment(" ", 10);
 
-        mPiechart.addSeries(seg0, new SegmentFormatter(Color.rgb(106, 168, 79), Color.BLACK, Color.BLACK, Color.BLACK));
-        mPiechart.addSeries(seg1, new SegmentFormatter(Color.rgb(255, 0, 0), Color.BLACK, Color.BLACK, Color.BLACK));
-        mPiechart.addSeries(seg2, new SegmentFormatter(Color.rgb(255, 153, 0), Color.BLACK, Color.BLACK, Color.BLACK));
-        PieRenderer pieRenderer = mPiechart.getRenderer(PieRenderer.class);
+        mPieChart.addSeries(seg0, new SegmentFormatter(Color.rgb(106, 168, 79), Color.BLACK, Color.BLACK, Color.BLACK));
+        mPieChart.addSeries(seg1, new SegmentFormatter(Color.rgb(255, 0, 0), Color.BLACK, Color.BLACK, Color.BLACK));
+        mPieChart.addSeries(seg2, new SegmentFormatter(Color.rgb(255, 153, 0), Color.BLACK, Color.BLACK, Color.BLACK));
+        PieRenderer pieRenderer = mPieChart.getRenderer(PieRenderer.class);
         pieRenderer.setDonutSize((float) 0 / 100, PieRenderer.DonutMode.PERCENT);
     }
 
@@ -131,7 +143,7 @@ public class FragmentGraph extends BaseFragment{
         mListViewLocations.setVisibility(View.GONE);
         mLoadingPanel.setVisibility(View.VISIBLE);
         if(Utils.isInternetConnected(getActivity().getApplicationContext())) {
-            mAsyncTaskHelper = new AsyncTaskHelper(status);
+            mAsyncTaskHelper = new AsyncLoaderAddressLatLon(status);
             mAsyncTaskHelper.execute(FragmentGraph.this);
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "Please enable data connection or WiFi to access internet",Toast.LENGTH_LONG).show();
@@ -144,14 +156,16 @@ public class FragmentGraph extends BaseFragment{
     }
 
     @Override
-    public void executeAsyncTaskCallBack(List<Address> addressList) {
-        if(addressList == null || addressList.size()<=0) {
+    public void executeAsyncTaskCallBack(List<AddressBase> addressLatLonList) {
+        if(addressLatLonList == null || addressLatLonList.size()<=0) {
             Toast.makeText(getActivity(), "No data found", Toast.LENGTH_LONG).show();
             setUIVisibility();
             return;
         }
-        mLocationListAdapter = new LocationListAdapter(addressList, getActivity());
-        mListViewLocations.setAdapter(mLocationListAdapter);
+        mAdapterLocationList = new AdapterLocationList(addressLatLonList, getActivity());
+        mListViewLocations.setAdapter(mAdapterLocationList);
+
+        mAsyncTaskHelper = null;
 
         setUIVisibility();
     }

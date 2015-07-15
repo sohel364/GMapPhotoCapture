@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,8 @@ import android.widget.Toast;
 
 import com.example.user.googlemaptest.R;
 import com.example.user.googlemaptest.Utilities.Utils;
-import com.example.user.googlemaptest.model.Address;
+import com.example.user.googlemaptest.fragments.containers.FragmentContainerBase;
+import com.example.user.googlemaptest.model.AddressBase;
 
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class FragmentUserInfo extends BaseFragment{
     private EditText editUserName;
     private EditText editUserAddress;
     private SharedPreferences mSharedPreferences;
+
+
+    private Button btnChangeFragment;
 
     @Nullable
     @Override
@@ -56,6 +61,8 @@ public class FragmentUserInfo extends BaseFragment{
         editUserName.setText(mSharedPreferences.getString(Utils.SHARED_KEY_USER_NAME, ""));
         editUserAddress.setText(mSharedPreferences.getString(Utils.SHARED_KEY_USER_ADDRESS, ""));
 
+        btnChangeFragment = (Button) view.findViewById(R.id.btn_change_fragment);
+
         setEditable(false);
     }
 
@@ -80,6 +87,16 @@ public class FragmentUserInfo extends BaseFragment{
                 onClickChangeCodeButton();
             }
         });
+
+        btnChangeFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new FragmentGraph();
+                FragmentContainerBase containerBase = (FragmentContainerBase)getParentFragment();
+                containerBase.replaceFragment(fragment, false);
+            }
+        });
+
     }
 
     private void onClickChangeCodeButton() {
@@ -236,7 +253,7 @@ public class FragmentUserInfo extends BaseFragment{
     }
 
     @Override
-    public void executeAsyncTaskCallBack(List<Address> addressList) {
+    public void executeAsyncTaskCallBack(List<AddressBase> addressLatLonList) {
 
     }
 }
