@@ -35,8 +35,6 @@ public class FragmentUserInfo extends BaseFragment{
     private SharedPreferences mSharedPreferences;
 
 
-    private Button btnChangeFragment;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,8 +59,6 @@ public class FragmentUserInfo extends BaseFragment{
         editUserName.setText(mSharedPreferences.getString(Utils.SHARED_KEY_USER_NAME, ""));
         editUserAddress.setText(mSharedPreferences.getString(Utils.SHARED_KEY_USER_ADDRESS, ""));
 
-        btnChangeFragment = (Button) view.findViewById(R.id.btn_change_fragment);
-
         setEditable(false);
     }
 
@@ -85,15 +81,6 @@ public class FragmentUserInfo extends BaseFragment{
             @Override
             public void onClick(View v) {
                 onClickChangeCodeButton();
-            }
-        });
-
-        btnChangeFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new FragmentGraph();
-                FragmentContainerBase containerBase = (FragmentContainerBase)getParentFragment();
-                containerBase.replaceFragment(fragment, false);
             }
         });
 

@@ -74,11 +74,4 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Update" />
-
-    <Button
-        android:id="@+id/btn_change_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Change Fragment"/>
 </LinearLayout>
